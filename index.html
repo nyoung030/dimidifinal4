@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>푸코의 관점으로 본 정상과 비정상의 관계</title>
+	<meta name="description" content="철학자 푸코가 주장하는 광인의 개념을 현대인의 모습에 빗대어 쉽게 설명해주는 웹사이트입니다.">
+	<meta property="og:image" content="https://nyoung030.github.io/dimidifinal4/thumbnail.png" />
+	<style>
+		@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+		html{
+    		font-family: 'Pretendard';
+    		font-weight: 600;
+    		line-height: 1.4;
+    		word-break: keep-all;}
+
+		body{background-color: #121212; color: white; margin: 0}
+		h1,h2,h3,p{word-break: keep-all; margin: 0}
+		h1{font-size: 70px}
+		h2{font-size: 60px}
+		h3{font-size: 40px}
+		p{font-size: 30px}
+		h4{font-size: 95px}
+		p2{font-size: 25px}
+		p3{font-size: 14px}
+
+		.artboard{max-width: 1200px; margin: 0 auto;}
+		.back{background-color: #121212;}
+		.orange{background-color: #FF5E00}
+		.black{background-color: black;}
+		.full{width: 100%}
+		.ani{animation: bg-zoom 12s ease-out forwards;}
+		@keyframes fade-up {from {opacity: 0; transform: translateY(40px);}
+ 							to {opacity: 1; transform: translateY(0);}}
+		@keyframes bg-zoom {from {background-size: 110%;}to {background-size: 100%;}}
+
+		.reveal {opacity: 0;
+		  transform: translateY(40px);
+		  transition: opacity 0.8s ease, transform 0.8s ease;}
+		.reveal.show {
+		  opacity: 1;
+		  transform: translateY(0);}
+		.question-block {  }
+
+		.first-text {opacity: 0;
+  		transition: opacity 0.8s ease;}
+		.first-text.show {opacity: 1;}
+
+		.second-text {
+		  opacity: 0;
+		  transform: translateY(20px);
+		  transition: opacity 0.8s ease, transform 0.8s ease;}
+		.second-text.show {opacity: 1;
+		  transform: translateY(0);}
+
+		.zoom-wrap {overflow: hidden;}
+		.zoom-on-scroll {
+		  display: block;
+		  width: 100%;
+		  transform-origin: center;
+		  transform: scale(1.02);    /* 시작 시 살짝만 키워놓고 */
+		  transition: transform 6s ease-out;  /* 천천히 줌 */}
+		.zoom-on-scroll.zoomed {transform: scale(1.08);}
+
+		/* 1: 좌측정렬 ㅣ 2: 박스-가운데정렬 ㅣ 3: 박스-왼쪽시작 ㅣ 4: 박스-중앙시작 ㅣ 5: 중앙정렬 */
+		.text1{padding-left: 70px;
+				animation: fade-up 0.9s ease-out both;
+  				animation-delay: 0.2s;}
+		.text2{padding: 0 70px;text-align: center; width: 540px; margin: 0 auto}
+		.text3{padding: 0 70px; width: 540px}
+		.text4{padding: 0 70px; width: 540px; margin-left: auto;}
+		.text5{text-align: center; padding: 0 70px}
+
+		.text6{text-align: center; background-color:#FF5E00; padding: 15px 0; width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);}
+		
+		/* 글자 하이라이트 */
+		.H1{color: #ff6600; font-family: "Pretendard-Bold", sans-serif; font-weight: 700;}
+		.H2{color: #ff6600; font-size: 50px; font-family: "Pretendard-Bold", sans-serif; }
+		.H3{color: #ff6600;}
+		.H4{position: relative; color: #FF5E00; display: inline-block; line-height: 1;}
+
+		/* 정상인 위 ... */
+		.H4::before {
+  		content: "···";
+  		position: absolute;
+  		top: -53px;
+  		left: 16px;
+  		width: 100%;
+  		text-align: center;
+  		white-space: nowrap;
+  		color: #FF5E00;
+  		font-weight: 700;
+  		font-size: 57px;
+  		letter-spacing: 0.6em;}
+
+  	.loop-strip{
+		  overflow: hidden;
+		  width: 100vw;
+		  margin-left: calc(50% - 50vw);
+		  margin-right: calc(50% - 50vw);}
+		.loop-track{
+		  display: flex;
+		  animation: strip-move 25s linear infinite;}
+		.loop-track img{
+		  width: 100%;
+		  flex-shrink: 0;
+		  display: block;}
+
+		@keyframes strip-move{
+		  0%{transform: translateX(0);}
+		  100%{transform: translateX(-50%);}}
+
+
+		
+		/* 여백, 종류가 더 이상 많아지면 여백 따로 안하고 개별적으로 padding top bottom 조정해야할 듯? */
+		.box1{padding: 300px 0px}
+		.box2{padding: 50px 0px}
+		.box3{padding: 150px}
+		.box4{padding: 40px}
+		.box5{padding: 200px 0px}
+		.box6{padding: 100px 0px}
+
+		.flex{display: flex; justify-content: center;}
+
+		.img11-wrap {position: relative;}
+		.img11-wrap img {display: block;}
+		.img11-text {position: absolute; left: 70px; top: 150px;}
+		.img11-text2 {position: absolute; right: 70px; top: 1500px; text-align: right;}
+
+	</style>
+
+</head>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        if (el.classList.contains('first-text')) {
+          el.classList.add('show');
+          setTimeout(() => {
+            el.style.opacity = 0;}, 500);
+        } else if (el.classList.contains('second-text')) {
+          setTimeout(() => el.classList.add('show'), 500);
+        } else {el.classList.add('show'); observer.unobserve(el);}}});}, { threshold: 0.3 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));});
+</script>
+
+<body>
+	<nav></nav>
+	<head></head>
+
+	<section class="ani" style="background: url('./img/1.png'); 
+						background-size: cover; 
+						background-position: center; 
+						background-repeat: no-repeat;
+						background-attachment: fixed;">
+		<div class="artboard">
+				<div class="box1"></div>
+				<div class="text1">
+					<h3>푸코의 관점으로 본</h3>
+					<h1>'정상'과 '비정상'의 경계 </h1>
+				</div>
+				<div class="box2"></div>
+		</div>
+	</section>
+
+	<section>
+		<div class="back">
+			<div class="artboard">
+				<div class="box3"></div>
+				<div class="text2">
+					<h2>"정병 걸렸네."</h2>
+					<p style="padding-top: 25px">다들 한 번씩은 들어본 적 있죠?<br>"정병 걸렸네."라는 말이 일상 언어가 될 만큼,<br>정신 건강은 더 이상 특별한 문제가 아닙니다.</p>
+				<div class="box3"></div>
+				</div>
+				<div class="text3">
+					<p>통계에 따르면 현대인의 약 3분의 1이 정신 건강 문제를 경험하고 있습니다.</p>
+					<img src="./img/2.png" style="padding-top: 30px">
+					<p style="font-size: 16px; color: #727272;">[자막뉴스] 국민 3~4명 중 1명 정신장애 경험 / OBS 뉴스</p></div>
+				<div class="text4" style="padding-top: 80px">
+					<p>SNS와 미디어 곳곳에서 정신 건강 이야기를 접하며, 우리는 "혹시 나도..?"라고 자문하게 됩니다.</p>
+					<video src="./img/3.mp4" autoplay muted loop style="padding-top: 30px"></video>
+				</div>
+				<div class="box1"></div>
+				<div class="text5 question-block">
+  					<h2 class="first-text reveal">그런데,</h2>
+  					<h4 class="second-text reveal">언제부터 <span class="H1">'정신병'</span>이었을까?</h4>
+				</div>
+				<div class="box3"></div>
+				<div class="text5">
+					<div class="flex">
+					<div style="padding-left: 90px;"><img src="./img/4.png"><br>
+					<div class="box4"></div>
+					<p2>19세기 프랑스 철학자<br>미셸 푸코(Michel Foucault)</p2></div>
+					<p style="padding-top: 140px; padding-left: 100px; padding-right: 70px; line-height: 1.2;">
+						<span class="H2">“</span> 광기는 이성의 부재가 아니라 <span class="H2">”</span><br>이성이 만들어낸 타자이다.</p></div>
+				</div>
+				<div class="box6"></div>
+				<div class="text4" style="padding-top: 40px">
+					<p>푸코는 『광기의 역사』를 통해 정신병의 개념이 역사적으로 구성되었음을 밝혔습니다.</p>
+					<img src="./img/5.png" style="padding-top: 30px"></div>
+				<div class="box3"></div>
+				<div class="text5">
+					<img src="./img/6.png" style="width: 60%;" style="padding: 70px"></div>
+				<div class="text2"> 
+					<p style="padding-top: 40px">푸코에 따르면,<br>근대 사회는 '정상'이라는 기준을 만들고</p>
+				</div>
+				<div class="box2"></div>
+			</div>
+		</div>
+
+	<section>
+		<div class="orange">
+			<div class="artboard">
+				<div class="box2"></div>
+				<div class="text5">
+					<img src="./img/7.png" style="width: 100%;"></div>
+				<div class="text2">
+					<p style="padding-top: 40px">그에 부합하지 않는 '비정상'을 체계적으로 배제했습니다.</p></div>
+				<div class="box3"></div>
+				<div class="text3">
+					<p class="reveal">배제된 이들은 교정과 치료의 대상이 되었고,</p></div>
+				<div class="box5"></div>
+				<div class="text4">
+					<p class="reveal">정신병원이라는 제도 안에 감금되었습니다.</p></div>
+				<div class="box5"></div>
+				<div class="text2" style="padding: 70px 0px">
+					<p>푸코는 '정상'과 '비정상', '이성'과 '광기'의 경계가 권력과 지식에 의해 만들어진 사회적 구성물임을 주장했습니다.</p></div>
+				<div class="box6"></div>			
+			</div>
+		</div>
+		<section>
+  <div class="back">
+    <div class="artboard">
+
+      <div class="loop-strip">
+        <div class="loop-track">
+          <img src="./img/8.png" alt="">
+          <img src="./img/8.png" alt="">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+	</section>
+
+	<section>
+		<div class="back">
+			<div class="artboard">
+				<div class="box3"></div>
+				<img src="./img/9.png">
+				<div class="text5" style="padding-top: 50px">
+					<p>즉, 정신병은 발견된 것이 아니라 <span class="H3">'발명'</span>된 것이라는 도발적인 시각을 제시했습니다.</p>
+				</div>
+				<div class="box1"></div>
+				<div class="text5 reveal">
+				  	<h2>그렇다면 <span class="H3">진짜 <span class="H4">정상인</span></span>은 존재하는가?</h2>
+				</div>
+
+				<div class="box3"></div>
+				<div class="text2">
+					<p>우리는 '정상인'이라는 개념을 당연하게 받아들이지만, 푸코는 이 범주 자체에 의문을 제기합니다.</p></div>
+				<div class="box5"></div>
+				<div class="text5">
+					<p>실제로 우리 모두는 일상에서</p></div>
+				<div class="text5">
+					<img src="./img/10.png" style="width: 100%;"></div>
+				<div class="text5">
+					<p>간의 경계를 끊임없이 넘나듭니다.</p></div>
+				<div class="box5"></div>
+				<div class="text1" style="padding-bottom: 20px;">
+					<p>푸코는 "중요한 것은 경계 그 자체가 아니라,</p></div>
+				<div class="text6">
+					<p>경계를 넘나들 수 있는</p></div>
+				<div class="text4" style="padding-top: 20px">
+					<p>유연성이 있는가”라고 말합니다.</p></div>
+				<div class="box3"></div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="back">
+			<div class="artboard">
+				<div class="img11-wrap">
+					<div class="full">
+						<img src="./img/11.png"></div>
+					<div class="img11-text reveal">
+						<p>몸이 지칠 때는 번아웃이 오고,</p>
+					</div>
+					<div class="img11-text2 reveal">
+						<p>슬픈 일이 있을 때 우울증이 생기는 것은</p>
+					</div>
+				</div>
+				<div class="text5">
+					<p>너무나 당연한 ‘정상적인' 반응이란 것입니다.</p>
+				</div>
+				<div class="box6"></div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="orange">
+			<div class="artboard">
+				<div class="box3"></div>
+				<div class="text2">
+					<p class="first-text reveal">그런데 우리는 왜 스스로<br>‘환자'라고 생각할까요?</p></div>
+				<div class="text5">
+					<p class="second-text reveal">번아웃, 우울증, 불안장애 같은 진단명이<br>일상 언어가 된 현실은 자연스러운 현상일까요?</p></div>
+				<div class="box3"></div>
+			</div>
+		</div>	
+	</section>
+
+	<section style="background: url('./img/12.png'); 
+						background-size: cover; 
+						background-position: center; 
+						background-repeat: no-repeat;
+						background-attachment: fixed;">
+		<div class="artboard">
+			<div class="box1"></div>
+			<div class="text1">
+				<h2>일상화된 진단명들,<br>그리고 보이지 않는 폭력</h2>
+				<p style="padding-top: 15px">푸코의 관점에서 보면, 이는 우리가 인지하지 못한 채 내면화한<br>'정상성의 폭력'일 수 있습니다.</p></div>
+			<div class="box2"></div>
+		</div>
+	</section>
+
+	<section>
+		<div class="back">
+			<div class="artboard">
+				<div class="box6"></div>
+				<div class="text4">
+					<p>우리는 스스로를 끊임없이 진단하고 분류하며, 의료적 시선으로 자신을 감시합니다.</p>
+					<img src="./img/13.png" style="padding-top: 30px"></div>
+				<div class="box2"></div>
+				<div class="text3">
+					<p>푸코는 이러한 자기 감시와 규율이 현대 권력의 작동 방식이라고 분석했습니다.</p>
+				<img src="./img/14.png" style="padding-top: 30px">
+				<p style="font-size: 16px; color: #727272;">푸코의 판옵티콘 - 가시성의 함정(외부 감시가 없어도 스스로를 감시)</p></div>
+				<div class="box3"></div>
+				<div class="text2">
+					<p>푸코의 사상은 정신병을 개인의 문제가 아닌 사회 구조의 문제로 바라보게 합니다.</p></div>
+				<div class="box6"></div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="orange reveal" >
+			<div class="artboard">
+				<div class="text2">
+					<p style="padding: 100px 0">현대인의 정신병에 대한 당신의 생각은 어떠한가요?</p></div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="back">
+			<div class="box3"></div>
+		</div>
+	</section>
+
+	<footer>
+		<div class="black">
+			<div class="artboard">
+				<div class="flex" style="padding: 60px 70px; color: #727272">
+					<p4 style="padding: 0 20px" align="center">정민영</p4>
+					<p4 style="padding: 0 20px" align="center">minyoung9523@naver.com</p4>
+					<p4 style="padding: 0 20px" align="center">010-2733-5722</p4>
+					<p4 style="padding: 0 20px" align="center">ⓒ 2025. minyoung All rights reserved.</p4>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>
